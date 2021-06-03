@@ -1,14 +1,20 @@
 package kodlamaio.hrms.entities.concretes;
 //adaylar
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Date;
+import java.util.List;
+
 @Entity
 @Data
 @EqualsAndHashCode(callSuper = false)
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "cv"})
 @Table(name  = "candidates")
 @AllArgsConstructor
 @NoArgsConstructor
@@ -28,6 +34,10 @@ public class Candidates extends Users{
 
     @Column(name  = "birthdate")
     private LocalDate birthDate;
+
+    @OneToMany(mappedBy = "candidates")
+    private List<Cv> cv;
+
 
 
 }

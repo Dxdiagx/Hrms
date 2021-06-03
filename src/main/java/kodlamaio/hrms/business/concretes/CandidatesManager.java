@@ -42,8 +42,7 @@ public class CandidatesManager implements CandidatesService {
                  (candidates.getEmail()==null) || (candidates.getPassword()==null) ){
           return new ErrorResult("Alanlar boş bırakılmaz.");
          }
-        else if (logCheckService1.logCheck(candidates.getNationalId(), candidates.getFirstName(), candidates.getLastName(),
-                 candidates.getBirthDate())==false){
+        else if (logCheckService1.logCheck()==false){
             return new ErrorResult("Mernis Doğrulaması Gerçekleştirilemedi.");
          }
         else if (logCheckService1.emailValid(candidates.getEmail())==false){

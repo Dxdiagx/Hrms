@@ -24,7 +24,7 @@ public class JobPostingsManager implements JobPostingsService {
 
     @Override
     public Result add(JobPostings jobPostings) {
-        this.jobPostingDao.save(jobPostings);
+        jobPostingDao.save(jobPostings);
         return new SuccessResult("İş ilanı Eklendi");
     }
 
