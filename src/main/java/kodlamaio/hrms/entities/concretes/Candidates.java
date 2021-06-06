@@ -2,10 +2,13 @@ package kodlamaio.hrms.entities.concretes;
 //adaylar
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Date;
@@ -18,7 +21,8 @@ import java.util.List;
 @Table(name  = "candidates")
 @AllArgsConstructor
 @NoArgsConstructor
-public class Candidates extends Users{
+public class Candidates extends Users {
+
     @Id
     @GeneratedValue
     @Column(name = "id")
@@ -32,12 +36,11 @@ public class Candidates extends Users{
     @Column(name = "national_identity")
     private String nationalId;
 
-    @Column(name  = "birthdate")
+    @Column(name = "birthdate")
     private LocalDate birthDate;
 
     @OneToMany(mappedBy = "candidates")
     private List<Cv> cv;
-
 
 
 }

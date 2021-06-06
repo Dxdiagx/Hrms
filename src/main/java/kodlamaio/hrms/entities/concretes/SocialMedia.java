@@ -28,4 +28,6 @@ public class SocialMedia {
 
     @Column(name="candidates_id")
     private int candidatesId;
+    @OneToMany(mappedBy = "socialMedia")
+    private List<Cv> cv;
 }

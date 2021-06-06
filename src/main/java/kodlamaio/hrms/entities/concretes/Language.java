@@ -15,7 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "languages")
-public class Languages {
+public class Language {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -27,7 +27,9 @@ public class Languages {
     @Column(name = "language_level",nullable = true)
     private int languageLevel;
 
-
     @Column(name="candidates_id")
     private int candidatesId;
+
+    @OneToMany(mappedBy = "language")
+    private List<Cv> cv;
 }

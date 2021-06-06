@@ -1,25 +1,27 @@
 package kodlamaio.hrms.business.concretes;
 
+import kodlamaio.hrms.Adapters.cloudinary.CloudinaryService;
 import kodlamaio.hrms.business.abstracts.CvService;
-import kodlamaio.hrms.core.utilities.results.DataResult;
-import kodlamaio.hrms.core.utilities.results.Result;
-import kodlamaio.hrms.core.utilities.results.SuccessDataResult;
-import kodlamaio.hrms.core.utilities.results.SuccessResult;
+import kodlamaio.hrms.core.utilities.results.*;
 import kodlamaio.hrms.dataAccess.abstracts.CvDao;
 import kodlamaio.hrms.entities.concretes.Cv;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 @Service
 public class CvManager implements CvService {
     private CvDao cvDao;
+    private CloudinaryService cloudinaryService;
 
     @Autowired
-    public CvManager(CvDao cvDao) {
+    public CvManager(CvDao cvDao, CloudinaryService cloudinaryService) {
 
         this.cvDao = cvDao;
+        this.cloudinaryService = cloudinaryService;
     }
 
 
@@ -47,5 +49,17 @@ public class CvManager implements CvService {
 
 
     }
+    @Override
+    public Result uploadImage(MultipartFile multipartFile, int cvId) {
+        try{
+            String filePath=this.cloudinaryService.upload(multipartFile).getData().get("url").toString();
+            Cv cv=cvDao.getOne(cvId);
+            cv.setImage(filePath);
+            cvDao.save(cv);
+            return new SuccessResult("Yüklendi");
 
+        }catch (IOException e){
+            return new ErrorResult("Yüklenirken Bir Hata Oluştu");
+        }
+    }
 }

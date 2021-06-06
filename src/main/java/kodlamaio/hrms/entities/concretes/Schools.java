@@ -31,8 +31,11 @@ public class Schools {
     @Column(name ="school_end_date",nullable = true)
     private LocalDate schoolEndDate;
 
-
     @Column(name="candidates_id")
     private int candidatesId;
+
+    @OneToMany(mappedBy = "schools")
+    private List<Cv> cv;
+
 
 }

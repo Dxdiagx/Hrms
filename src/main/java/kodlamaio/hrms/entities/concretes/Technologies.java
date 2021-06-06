@@ -25,4 +25,7 @@ public class Technologies {
 @Column(name="candidates_id")
 private int candidatesId;
 
+    @OneToMany(mappedBy = "technologies")
+    private List<Cv> cv;
+
 }

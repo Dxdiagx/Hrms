@@ -6,6 +6,7 @@ import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.entities.concretes.Cv;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 @RestController
@@ -42,5 +43,9 @@ public class CvController {
         return this.cvService.getAllSortedSchoolExperience();
     }
 
+    @PostMapping("/uploadimage")
+    public Result uploadImage(@RequestBody MultipartFile file, @RequestParam int cvId){
+        return this.cvService.uploadImage(file, cvId);
+    }
 
 }
